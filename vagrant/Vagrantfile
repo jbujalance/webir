@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/buster64"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+  # Synchronize the dist folder si that we can install the application from the wheel package in the VM, as it would be done in production
+  config.vm.synced_folder "../dist", "/home/vagrant/dist"
+
+  # Gunicorn provision
+  config.vm.provision "shell", privileged: false, path: "./provision.sh"
+end
