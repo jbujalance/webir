@@ -2,6 +2,7 @@ from py_irsend import irsend
 
 
 class LircRemoteService:
+    # TODO log the calls with the attributes
     """
     This class acts as an interface to the LIRC daemon that is expected to be installed and running in the host.
     """

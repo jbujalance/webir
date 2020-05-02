@@ -21,6 +21,24 @@ python setup.py sdist bdist_wheel
 ```
 **Note:** The application should be packaged within the virtual environment.
 
+## Examples
+* Send a single code:
+```
+/remote/send/codes/KEY_POWER:
+```
+* Send a single code repeated 3 times:
+```
+/remote/send/codes/KEY_POWER?count=3
+```
+* Send multiple codes in a single request:
+```
+/remote/send/codes/KEY_POWER,KEY_CHANNELUP
+```
+* Send an integer that is translated into the corresponding code:
+```
+/remote/send/integer/2
+```
+
 ## Vagrant
 A Vagrant environment is set up in order to test the deployment with the production WSGI HTTP Server `gunicorn`.
 `Gunicorn` is not compatible with Windows, so in order to test the deployment of the application on this production-ready server we need a Unix VM.
