@@ -1,14 +1,14 @@
 from flask import Flask
 
 
-def create_app(config_filename='../config.py'):
+def create_app():
     """
     Flask application factory.
-    :param config_filename: The name of the configuration file to load.
     :return: The instance of the Flask application.
     """
     app = Flask(__name__)
-    app.config.from_pyfile(config_filename)
+    app.config.from_object('webir.config')
+    app.config.from_envvar('WEBIR_CONFIGURATION', silent=True)
 
     from .converters import ListConverter
     app.url_map.converters[ListConverter.NAME] = ListConverter
