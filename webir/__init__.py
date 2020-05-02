@@ -8,6 +8,7 @@ def create_app():
     """
     app = Flask(__name__)
     app.config.from_object('webir.config')
+    # TODO maybe use the instance configurations instead of the setting the path in the env: https://flask.palletsprojects.com/en/master/config/#instance-folders
     app.config.from_envvar('WEBIR_CONFIGURATION', silent=True)
 
     from .converters import ListConverter

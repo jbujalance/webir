@@ -1,6 +1,6 @@
 from typing import List
 
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, jsonify
 
 from .services import LircRemoteService
 
@@ -11,6 +11,7 @@ lirc_remote = LircRemoteService(remote=current_app.config[LircRemoteService.REMO
 @remote_blueprint.route('/send/integer/<int:number>')
 def send_number(number: int):
     lirc_remote.send_number(number)
+    return __response(number)
 
 
 @remote_blueprint.route('/send/codes/<list:codes>')
@@ -18,3 +19,11 @@ def send_codes(codes: List[str]):
     # TODO validate format of the query parameter: count should be an integer
     count = request.args.get('count')
     lirc_remote.send_once(codes, count)
+    return __response(codes)
+
+
+def __response(payload, status='success'):
+    return jsonify(
+        status=status,
+        data=payload
+    )
