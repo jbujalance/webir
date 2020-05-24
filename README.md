@@ -55,14 +55,13 @@ A Vagrant environment is set up in order to test the deployment with the product
 The VM is already provisioned with the WebIR application and a Gunicorn server.
 To run the application on Gunicorn in the VM, follow these instructions:
 * Activate the Python virtual environment:
-```shell script
-source venv/bin/activate
-```
+
+        source venv/bin/activate
+
 * Run the application on Gunicorn with the default configuration:
-```shell script
-gunicorn -b 0.0.0.0:8080 "webir:create_app()"
-```
+
+        gunicorn -b 0.0.0.0:8080 "webir:create_app()"
+
 * Reinstall after modifications: After having modified the sources and repackaged the application, the package can be reinstalled:
-````shell script
-pip install dist/webir-0.1.0-py3-none-any.whl --force-reinstall
-````
+
+        pip install dist/webir-0.1.0-py3-none-any.whl --force-reinstall
