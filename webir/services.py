@@ -1,4 +1,8 @@
+from difflib import SequenceMatcher
+
 from py_irsend import irsend
+
+from .exceptions import NotSupportedChannelError
 
 
 class LircRemoteService:
@@ -13,7 +17,7 @@ class LircRemoteService:
     # The prefix of the LIRC 'KEY' namespace
     REMOTE_KEY_PREFIX = 'KEY_'
 
-    def __init__(self, lirc_sender=irsend, remote: str = None):
+    def __init__(self, remote: str, lirc_sender=irsend):
         """
         Class constructor.
         :param lirc_sender: The implementation of the LIRC irsend program that is to be used to send IR commands.
@@ -40,3 +44,46 @@ class LircRemoteService:
     @staticmethod
     def __get_digit_key_code(digit: int):
         return LircRemoteService.REMOTE_KEY_PREFIX + str(digit)
+
+
+class ChannelService:
+    """
+    This class provides information about the supported channels in this instance of WebIR.
+    It mainly provides the channel number given a channel name.
+    """
+
+    MINIMUM_ACCEPTED_RATIO = 0.6
+
+    def __init__(self):
+        self.matcher = SequenceMatcher()
+        # TODO read the channels from a configuration file
+        self.channels = {
+            "la 1": 1,
+            "la uno": 1,
+            "la 2": 2,
+            "la dos": 2,
+            "antena 3": 3,
+            "antena tres": 3,
+            "cuatro": 4,
+            "telecinco": 5,
+            "la sexta": 6,
+            "telemadrid": 7,
+            "teledeporte": 8
+        }
+
+    def get_channel_number(self, channel_name: str) -> int:
+        best_name, best_number, best_score = self.__get_best_match(channel_name)
+        if best_score < ChannelService.MINIMUM_ACCEPTED_RATIO:
+            message = f"The channel {channel_name} was matched to {best_name} with a non reliable score of {best_score}"
+            raise NotSupportedChannelError(channel_name, message)
+        return best_number
+
+    def __get_best_match(self, channel_name: str):
+        self.matcher.set_seq2(channel_name)
+        best_name, best_number, best_score = None, None, 0
+        for (name, number) in self.channels:
+            self.matcher.set_seq1(name)
+            score = self.matcher.ratio()
+            if score > best_score:
+                best_name, best_number, best_score = name, number, score
+        return best_name, best_number, best_score
