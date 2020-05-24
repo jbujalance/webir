@@ -52,24 +52,12 @@ class ChannelService:
     It mainly provides the channel number given a channel name.
     """
 
+    CHANNELS_CONF_KEY = "CHANNELS"
     MINIMUM_ACCEPTED_RATIO = 0.6
 
-    def __init__(self):
+    def __init__(self, channels: dict):
         self.matcher = SequenceMatcher()
-        # TODO read the channels from a configuration file
-        self.channels = {
-            "la 1": 1,
-            "la uno": 1,
-            "la 2": 2,
-            "la dos": 2,
-            "antena 3": 3,
-            "antena tres": 3,
-            "cuatro": 4,
-            "telecinco": 5,
-            "la sexta": 6,
-            "telemadrid": 7,
-            "teledeporte": 8
-        }
+        self.channels = channels
 
     def get_channel_number(self, channel_name: str) -> int:
         best_name, best_number, best_score = self.__get_best_match(channel_name)

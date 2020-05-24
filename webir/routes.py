@@ -7,7 +7,7 @@ from .services import LircRemoteService, ChannelService
 
 remote_blueprint = Blueprint('remote', __name__, url_prefix='/remote')
 lirc_remote = LircRemoteService(remote=current_app.config[LircRemoteService.REMOTE_NAME_CONF_KEY])
-channel_service = ChannelService()
+channel_service = ChannelService(current_app.config[ChannelService.CHANNELS_CONF_KEY])
 
 
 @remote_blueprint.route('/send/integer/<int:number>')
