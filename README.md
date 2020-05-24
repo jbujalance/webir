@@ -23,21 +23,26 @@ python setup.py sdist bdist_wheel
 
 ## Examples
 * Send a single code:
-```
-/remote/send/codes/KEY_POWER:
-```
+
+        /remote/send/codes/KEY_POWER:
+
 * Send a single code repeated 3 times:
-```
-/remote/send/codes/KEY_POWER?count=3
-```
+
+        /remote/send/codes/KEY_POWER?count=3
+
 * Send multiple codes in a single request:
-```
-/remote/send/codes/KEY_POWER,KEY_CHANNELUP
-```
+
+        /remote/send/codes/KEY_POWER,KEY_CHANNELUP
+
 * Send an integer that is translated into the corresponding code:
-```
-/remote/send/integer/2
-```
+
+        /remote/send/integer/2
+
+* Send a channel name, that is matched to the supported channels given in the configuration:<br>
+This endpoint is protected against typos. If the provided channel name is close enough to a supported channel,
+then the request will be accepted, otherwise a 404 error will be returned.
+
+        /remote/send/channel/telemadrid
 
 ## Vagrant
 A Vagrant environment is set up in order to test the deployment with the production WSGI HTTP Server `gunicorn`.

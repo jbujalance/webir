@@ -81,7 +81,7 @@ class ChannelService:
     def __get_best_match(self, channel_name: str):
         self.matcher.set_seq2(channel_name)
         best_name, best_number, best_score = None, None, 0
-        for (name, number) in self.channels:
+        for (name, number) in self.channels.items():
             self.matcher.set_seq1(name)
             score = self.matcher.ratio()
             if score > best_score:
