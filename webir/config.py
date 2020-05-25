@@ -5,15 +5,20 @@ REMOTE_NAME = 'Telefunken-LCD-TV'
 
 # Map of supported channel names to the corresponding channel number on the managed TV
 CHANNELS = {
-    "la 1": 1,
-    "la uno": 1,
-    "la 2": 2,
-    "la dos": 2,
-    "antena 3": 3,
-    "antena tres": 3,
-    "cuatro": 4,
-    "telecinco": 5,
-    "la sexta": 6,
-    "telemadrid": 7,
-    "teledeporte": 8
+    "la 1": 852,
+    "la uno": 852,
+    "la 2": 853,
+    "la dos": 853,
+    "antena 3": 858,
+    "antena tres": 858,
+    "cuatro": 805,
+    "telecinco": 804,
+    "la sexta": 859,
+    "telemadrid": 825,
+    "teledeporte": 839,
+    "tdp": 839,
+    "neox": 860,
+    "24h": 854,
+    "24 horas": 854,
+    "dmax": 819
 }
