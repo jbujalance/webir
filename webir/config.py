@@ -23,3 +23,8 @@ CHANNELS = {
     "24 horas": 827,
     "dmax": 819
 }
+
+AUTH_JWKS_URL = "http://localhost:8081/auth/realms/home/protocol/openid-connect/certs"
+AUTH_ISSUER = "http://localhost:8081/auth/realms/home"
+AUTH_AUDIENCE = "webir-alexa"
+AUTH_SCOPE = "webir"
