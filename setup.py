@@ -15,7 +15,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Flask==1.1.2',
-        'py-irsend==1.0.2'
+        'py-irsend==1.0.2',
+        'flask-of-oil==1.1.0'
     ],
     python_requires='>=3.7',
 )
